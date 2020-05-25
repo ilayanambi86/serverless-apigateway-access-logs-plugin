@@ -1,0 +1,31 @@
+{
+    "name": "serverless-apigateway-access-logs-plugin",
+    "version": "1.0.0",
+    "description": "Add api gateway access logs",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ilayanambi86/serverless-apigateway-access-logs-plugin.git"
+    },
+    "keywords": [
+        "serverless plugin api gateway access logging",
+        "serverless plugin",
+        "api gateway access logging",
+        "aws serverless api gateway access logging",
+        "access logging",
+        "api gateway"
+    ],
+    "author": "Ilayanambi",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ilayanambi86/serverless-apigateway-access-logs-plugin/issues"
+    },
+    "homepage": "https://github.com/ilayanambi86/serverless-apigateway-access-logs-plugin#readme",
+    "dependencies": {
+        "user": "0.0.0",
+        "underscore": "1.8.3"
+    }
+}
