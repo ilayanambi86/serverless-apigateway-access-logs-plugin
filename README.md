@@ -1,7 +1,7 @@
 # serverless-apigateway-access-logs-plugin
 serverless-apigateway-access-logs-plugin
 
-Plugin to update api gateway access logs.
+Plugin to update api gateway access logs. This plugin takes the requried params defined under provider. Based on the given input (account, logGroup), it constructs the arn "arn:aws:logs:<region>:<account>:log-group:<logGroup>".
 
 ### Using this pluging
 ```
