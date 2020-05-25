@@ -41,7 +41,7 @@ class ServerlessPlugin {
             if (accessLogs && resourceType === 'AWS::ApiGateway::Deployment') {
                 delete template.Resources[key].Properties.StageName;
 
-                var stageConfig = self._getDefaultStageConfig(region, stage, key, accessLogs)
+                var stageConfig = self._getStageConfig(region, stage, key, accessLogs)
 
                 if (template.Resources.ApiGatewayStage) {
                     _.merge(template.Resources.ApiGatewayStage, stageConfig);
@@ -58,7 +58,7 @@ class ServerlessPlugin {
         });
     }
 
-    _getDefaultStageConfig(region, stage, deploymentId, accessLogs) {
+    _getStageConfig(region, stage, deploymentId, accessLogs) {
         var stageConfig = {
             Type: "AWS::ApiGateway::Stage",
             Properties: {
