@@ -28,6 +28,19 @@ class ServerlessPlugin {
         var stage = this.serverless.variables.options.stage
         var region = this.serverless.service.provider.region;
 
+        if (!this.serverless.service.provider.apiGatewayAccessLogs && this.serverless.service.custom && this.serverless.service.custom.apiGatewayAccessLogs) {
+            accessLogs = this.serverless.service.custom.apiGatewayAccessLogs
+            self.serverless.cli.log('Working with apiGatewayAccessLogs under custom.');
+            self.serverless.cli.log('\t Format: ' + accessLogs.format);
+            self.serverless.cli.log('\t DestinationArn: ' + 'arn:aws:logs:' + region + ':' + accessLogs.account + ':log-group:' + accessLogs.logGroup);
+        } else {
+            if (this.serverless.service.provider.apiGatewayAccessLogs) {
+                self.serverless.cli.log('Working with apiGatewayAccessLogs under provider.');
+                self.serverless.cli.log('\t Format: ' + accessLogs.format);
+                self.serverless.cli.log('\t DestinationArn: ' + 'arn:aws:logs:' + region + ':' + accessLogs.account + ':log-group:' + accessLogs.logGroup);
+            }
+        }
+
         if (this.serverless.variables.options.stage) {
             stage = this.serverless.variables.options.stage;
         }
