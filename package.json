@@ -1,6 +1,6 @@
 {
     "name": "serverless-apigateway-access-logs-plugin",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "description": "Add api gateway access logs",
     "main": "index.js",
     "scripts": {

@@ -57,8 +57,10 @@ class ServerlessPlugin {
                 var stageConfig = self._getStageConfig(region, stage, key, accessLogs)
 
                 if (template.Resources.ApiGatewayStage) {
-                    _.merge(template.Resources.ApiGatewayStage, stageConfig);
-                    self.serverless.cli.log('Merged AWS api gateway custom logs..');
+                    if (template.Resources.ApiGatewayStage.Properties && !template.Resources.ApiGatewayStage.Properties.AccessLogSetting) {
+                        template.Resources.ApiGatewayStage.Properties['AccessLogSetting'] = self._getAccessLogSetting(region, accessLogs);
+                        self.serverless.cli.log('Merged AWS api gateway custom logs..');
+                    }
                 } else {
                     template.Resources.ApiGatewayStage = stageConfig;
                     self.serverless.cli.log('Updated AWS api gateway custom logs..');
@@ -85,13 +87,17 @@ class ServerlessPlugin {
                 } : {
                     "Ref": "TestDeployment"
                 },
-                AccessLogSetting: {
-                    Format: accessLogs.format,
-                    DestinationArn: 'arn:aws:logs:' + region + ':' + accessLogs.account + ':log-group:' + accessLogs.logGroup
-                }
+                AccessLogSetting: this._getAccessLogSetting(region, accessLogs)
             }
         }
         return stageConfig
+    }
+
+    _getAccessLogSetting(region, accessLogs) {
+        return {
+            Format: accessLogs.format,
+            DestinationArn: 'arn:aws:logs:' + region + ':' + accessLogs.account + ':log-group:' + accessLogs.logGroup
+        }
     }
 }
 
